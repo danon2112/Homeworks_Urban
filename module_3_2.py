@@ -2,16 +2,20 @@ name = 'Daniil'
 
 def send_email(message, recipient, *, sender='university.help@gmail.com'):
 
-    if not('@' in recipient) or not('@' in sender):
+    if not '@' in recipient or recipient == '@':
         print(f"Невозможно отправить письмо с адреса {sender} на адрес {recipient}")
         return
 
-    domains = ['.com', '.net', '.ru']
+    if not '@' in sender or sender == '@':
+        print(f"Невозможно отправить письмо с адреса {sender} на адрес {recipient}")
+        return
+
+    domains = ['com', 'net', 'ru']
     correct_domain = False
     for domain in domains:
-        if recipient[len(recipient)-len(domain):] == domain:
+        if recipient.split('.', 2)[-1] == domain:
             correct_domain = True
-        if sender[len(sender)-len(domain):] == domain:
+        if sender.split('.', 2)[-1] == domain:
             correct_domain = True
             break
         else:
@@ -38,4 +42,5 @@ send_email('Вы видите это сообщение как лучший ст
 send_email('Пожалуйста, исправьте задание', 'urban.student@mail.ru', sender='urban.teacher@mail.uk')
 send_email('Пожалуйста, исправьте задание', 'urban.studentmail.ru', sender='urban.teachermail.ru')
 send_email('Напоминаю самому себе о вебинаре', 'urban.teacher@mail.ru', sender='urban.teacher@mail.ru')
+send_email('Вы видите это сообщение как лучший студент курса!', '@', sender='urban.info@gmail.com')
 
