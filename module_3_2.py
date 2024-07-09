@@ -10,19 +10,12 @@ def send_email(message, recipient, *, sender='university.help@gmail.com'):
         print(f"Невозможно отправить письмо с адреса {sender} на адрес {recipient}")
         return
 
-    domains = ['com', 'net', 'ru']
-    correct_domain = False
-    for domain in domains:
-        if recipient.split('.', 2)[-1] == domain:
-            correct_domain = True
-        if sender.split('.', 2)[-1] == domain:
-            correct_domain = True
-            break
-        else:
-            correct_domain = False
+    if not recipient.endswith('.com') and not recipient.endswith('.ru') and not recipient.endswith('.net'):
+        print(f"Невозможно отправить письмо с адреса {sender} на адрес {recipient}")
+        return
 
-    if not correct_domain:
-        print(f'Невозможно отправить письмо с адреса {sender} на адрес {recipient}')
+    if not sender.endswith('.com') and not sender.endswith('.ru') and not sender.endswith('.net'):
+        print(f"Невозможно отправить письмо с адреса {sender} на адрес {recipient}")
         return
 
 
@@ -43,4 +36,3 @@ send_email('Пожалуйста, исправьте задание', 'urban.stu
 send_email('Пожалуйста, исправьте задание', 'urban.studentmail.ru', sender='urban.teachermail.ru')
 send_email('Напоминаю самому себе о вебинаре', 'urban.teacher@mail.ru', sender='urban.teacher@mail.ru')
 send_email('Вы видите это сообщение как лучший студент курса!', '@', sender='urban.info@gmail.com')
-
