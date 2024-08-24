@@ -1,3 +1,8 @@
+a = {}
+a[0] = 12
+a[1] = 10
+print(a)
+
 class Animal:
     def __init__(self, name):
         self.alive = True
